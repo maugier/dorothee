@@ -2,6 +2,7 @@
 
 import random
 import re
+import time
 from irc.bot import SingleServerIRCBot
 
 chansons = [
@@ -28,8 +29,10 @@ chansons = [
 game_re = re.compile('g+[a@]+m+[e3]+|j+e+u+', re.I)
 
 class Dorothee(SingleServerIRCBot):
-    def __init__(self, servers, nick, real, channel, **kw):
+    def __init__(self, servers, nick, real, channel, grace=3600, **kw):
         self.channel = channel
+        self.ts = None
+        self.grace = 3600
         super().__init__(servers, nick, real, **kw)
 
     def on_welcome(self, c, e):
@@ -38,5 +41,8 @@ class Dorothee(SingleServerIRCBot):
     def on_pubmsg(self, c, e):
         msg = e.arguments[0]
         if game_re.search(msg):
-            c.privmsg(e.target, random.choice(chansons))
+            now = time.now()
+            if self.ts is None or (now - self.ts) > self.grace:
+                c.privmsg(e.target, random.choice(chansons))
+                self.ts = now
             
