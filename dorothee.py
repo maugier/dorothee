@@ -27,7 +27,7 @@ chansons = [
     "THIS IS THE CRAZY FROG"
 ]
 
-game_re = re.compile('g+[a@]+m+[e3]+|j+e+u+', re.I)
+game_re = re.compile('g+[a@]+m+[e3]+|j+e+u+|p+e+r+d+(r+e+|e+z+)', re.I)
 
 class Dorothee(SingleServerIRCBot):
     def __init__(self, servers, nick, real, channel, grace=3600, **kw):
@@ -41,6 +41,6 @@ class Dorothee(SingleServerIRCBot):
     def on_pubmsg(self, c, e):
         msg = e.arguments[0]
         if game_re.search(msg):
-            if not self.rate.recent(e.target):
+            if not self.rate(e.target):
                 c.privmsg(e.target, "♬ {0} ♬".format(random.choice(chansons)))
             
