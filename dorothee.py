@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import random
+import rate
 import re
 import time
 from irc.bot import SingleServerIRCBot
@@ -31,8 +32,7 @@ game_re = re.compile('g+[a@]+m+[e3]+|j+e+u+', re.I)
 class Dorothee(SingleServerIRCBot):
     def __init__(self, servers, nick, real, channel, grace=3600, **kw):
         self.channel = channel
-        self.ts = None
-        self.grace = 3600
+        self.rate = rate.RateLimiter(grace)
         super().__init__(servers, nick, real, **kw)
 
     def on_welcome(self, c, e):
@@ -41,8 +41,6 @@ class Dorothee(SingleServerIRCBot):
     def on_pubmsg(self, c, e):
         msg = e.arguments[0]
         if game_re.search(msg):
-            now = time.time()
-            if self.ts is None or (now - self.ts) > self.grace:
+            if not self.rate.recent(e.target):
                 c.privmsg(e.target, "♬ {0} ♬".format(random.choice(chansons)))
-                self.ts = now
             
