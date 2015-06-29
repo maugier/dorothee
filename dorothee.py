@@ -41,7 +41,7 @@ class Dorothee(SingleServerIRCBot):
     def on_pubmsg(self, c, e):
         msg = e.arguments[0]
         if game_re.search(msg):
-            now = time.now()
+            now = time.time()
             if self.ts is None or (now - self.ts) > self.grace:
                 c.privmsg(e.target, random.choice(chansons))
                 self.ts = now
