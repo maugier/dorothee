@@ -10,6 +10,9 @@ chansons = [
     "ALLEZ LES BLEUS, ON EST TOUS ENSEEEEEMBLE",
     "AH QUE LE MONDE EST PETIT, AH QUE LE MONDE EST PETIT",
     "BISOOUUU BISOOUUU, GENTIL BISOUNOURS",
+    "BIG BISOUUU ! BIG BISOUUU !",
+    "C'EST LA DANSE DES CANARDS",
+    "CHAUD CHAUD CHAUD, CACAO",
     "HEEEEY MACARENA",
     "IT'S FRIDAY FRIDAY",
     "IT'S THE FINAL COUUUNTDOOOWN",
@@ -22,12 +25,18 @@ chansons = [
     "NEVER GONNA GIVE YOU UP, NEVER GONNA LET YOU DOWN",
     "NUMA NUMA IEI, NUMA NUMA IEI, NUMA NUMA NUMA IEI",
     "OOOOOOOOOH, BABOOSCHKA BABOOSCHKA",
+    "OHÉ, OHÉ, CAPITAINE ABANDONNNÉÉÉÉ",
+    "OUTAI, PAPAOUTAI, OUTÉ PAPAOUTAIII",
     "PAPILLON DE LUMIEREUH",
+    "PAPAYOUUU, PAPAYOUUUUU; PAPAYOU, PAPAYOU-LÉLÉ",
     "SCHNII SCHNAA SCHNAPPY, SCHNAPPY SCHNAPPY SCHNAP",
-    "THIS IS THE CRAZY FROG"
+    "TIRELIPIMPON SUR LE CHIHUAHUA",
+    "THIS IS THE CRAZY FROG",
+    "UN PEU PLUS PRÈS DES ÉTOIIIIILES",
+    "VIENS, JE T'EMMEEEENE SUR MON BAAATEAU BLANC"
 ]
 
-game_re = re.compile('g+[a@]+m+[e3]+|j+e+u+|p+e+r+d+(r+e+|e+z+)', re.I)
+game_re = re.compile('g+[a@]+m+[e3]+|j+e+u+|p+e+r+d+(r+e+|e+z+|u+)', re.I)
 
 class Dorothee(SingleServerIRCBot):
     def __init__(self, servers, nick, real, channel, grace=3600, **kw):
